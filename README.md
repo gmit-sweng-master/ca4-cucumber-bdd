@@ -27,6 +27,21 @@ your remote. See 'add' in the [git-remote man page](https://git-scm.com/docs/git
 for how to add remotes. (Tags are ignored by deployment remotes such as Heroku,
 so there's no point in pushing tags there.)
 
+## Setup
+- `cd rottenpotatoes`
+    - Ignore "Unknown ruby interpreter version" message
+- `bundle install`
+- `cucumber`
+
+```
+Migrations are pending. To resolve this issue, run:
+
+        bin/rake db:migrate RAILS_ENV=test
+```
+- `rake db:migrate RAILS_ENV=test`
+- `cucumber`
+
+
 **Part 1: Create a declarative scenario step for adding movies**
 
 The goal of BDD is to express behavioral tasks rather than low-level operations.  
