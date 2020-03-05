@@ -19,8 +19,8 @@ We recommend
 that you do a `git commit` as you get each part working.  As an optional
 additional help, git allows you to associate tags---symbolic
 names---with particular commits.  For example, immediately after doing a
-commit, you could say `git tag hw4-part1b` , and thereafter you could
-use `git diff hw4-part1b` to see differences since that commit, rather
+commit, you could say `git tag part1b` , and thereafter you could
+use `git diff part1b` to see differences since that commit, rather
 than remembering its commit ID.  Note that after creating a tag in your
 local repo, you need to say `git push YOUR_REMOTE --tags` to push the tags to
 your remote. See 'add' in the [git-remote man page](https://git-scm.com/docs/git-remote)
@@ -28,21 +28,39 @@ for how to add remotes. (Tags are ignored by deployment remotes such as Heroku,
 so there's no point in pushing tags there.)
 
 ## Setup
-- `cd rottenpotatoes`
-    - Ignore "Unknown ruby interpreter version" message
-- `bundle install`
-- `cucumber`
+- `cd` into the app directory `rottenpotatoes`
+    - In GitPod you may see an `Unknown ruby interpreter version` warning. You can safely ignore this.
+- Install the dependencies we need (including the `cucumber` tool, which is defined in the `Gemfile`).
+
+```
+bundle install
+```
+
+- Use the cucumber tool to run pre-existing feature files:
+
+```
+cucumber
+```
+- You'll see error output, ending in this message:
+
 
 ```
 Migrations are pending. To resolve this issue, run:
 
-        bin/rake db:migrate RAILS_ENV=test
+          bin/rake db:migrate RAILS_ENV=test
+```     
+- This is telling us that we need to set up a test database before we can run tests against it. A migration to create the database schema has already been created, run this on the test database with this command:
+
 ```
-- `rake db:migrate RAILS_ENV=test`
-- `cucumber`
+rake db:migrate RAILS_ENV=test
+```
+- Run the cucumber tests again:
+```
+cucumber
+```
+- You should see colour-coded test output indicating some steps have passed and some have failed.
 
-
-**Part 1: Create a declarative scenario step for adding movies**
+## Part 1: Create a declarative scenario step for adding movies
 
 The goal of BDD is to express behavioral tasks rather than low-level operations.  
 
@@ -69,7 +87,7 @@ SUCCESS is when all Background steps for the scenarios in
 `filter_movie_list.feature` and `sort_movie_list.feature` are passing
 Green. 
 
-**Part 2: Happy paths for filtering movies**
+## Part 2: Happy paths for filtering movies
 
 1. Complete the scenario `restrict to movies with `PG` or `R` ratings` in `filter_movie_list.feature`. You can use existing step definitions in `web_steps.rb` to check and uncheck the appropriate boxes, submit the form, and check whether the correct movies appear (and just as importantly, movies with unselected ratings do not appear).
 
@@ -89,7 +107,7 @@ Update: You no longer need to implement the scenario for no ratings selected.
 
 4. Use your new step definitions to complete the scenario `all ratings selected`. SUCCESS is when all scenarios in `filter_movie_list.feature` pass with all steps green.
 
-**Part 3: Happy paths for sorting movies by title and by release date**
+## Part 3: Happy paths for sorting movies by title and by release date
 
 1. Since the scenarios in `sort_movie_list.feature` involve sorting, you will need the ability to have steps that test whether one movie appears before another in the output listing. Create a step definition that matches a step such as 
 `Then I should see "Aladdin" before "Amelie"`
@@ -111,7 +129,7 @@ Update: You no longer need to implement the scenario for no ratings selected.
 
 **SUCCESS** is all steps of all scenarios in both feature files passing Green.
 
-**Submission**
+## Submission
 
 To submit your assignment, please submit a `.zip` compressed archive
 file containing just your `features` directory. The command for doing
